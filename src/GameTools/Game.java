@@ -203,6 +203,15 @@ public class Game extends JFrame implements ActionListener {
         		else if (e.getKeyCode() == KeyEvent.VK_LEFT) { //Left arrow key code
         			ismoved = board.searchPeace(3); //moving the point that is right to the empty point
         		} 
+        		
+        		else if ((e.isControlDown() && e.getKeyCode() == KeyEvent.VK_Z) ) { // In case of ctrl+Z press
+        			board.undo(); // updating the board with the prev game status . 
+    				for (int i=0 ; i<ROWS; i++)
+    					for (int j=0 ; j<COLS ; j++) {
+    						btnBoard[i][j].setIcon(board.getPoint(i, j).getIcon()); // update the buttons icons.
+    					}
+    				frame.requestFocusInWindow(); 
+        		} 
 
         		if (ismoved==true) { // if there was a movement
         			if (board.isGameOver()) { // if the game is over .
